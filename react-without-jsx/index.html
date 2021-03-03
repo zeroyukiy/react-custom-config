@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .content {
+                width: 400px;
+                background-color: grey;
+            }
+            ul > li {
+                color: azure;
+            }
+            ul > li.active {
+                color: brown;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="react-container"></div>
+
+        <script src="../node_modules/react/umd/react.production.min.js"></script>
+        <script src="../node_modules/react-dom/umd/react-dom.production.min.js"></script>
+        <script>
+            const h1 = React.createElement("h1", null, "something here");
+            const list = ["a", "b", "c", "d"];
+
+            const content = React.createElement(
+                "div",
+                { className: "content" },
+                h1,
+                React.createElement(
+                    "ul",
+                    null,
+                    React.createElement("li", null, "item 1"),
+                    React.createElement(
+                        "li",
+                        { className: "active" },
+                        "item 2"
+                    ),
+                    React.createElement("li", null, "item 3"),
+                    React.createElement("li", null, "item 4"),
+                    list.map((element, key) =>
+                        key === 1
+                            ? React.createElement(
+                                  "li",
+                                  { className: "active" },
+                                  `item ${++key}`
+                              )
+                            : React.createElement("li", null, `item ${++key}`)
+                    )
+                )
+            );
+
+            ReactDOM.render(
+                content,
+                document.getElementById("react-container")
+            );
+        </script>
+    </body>
+</html>
